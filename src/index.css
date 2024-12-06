@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		font-family: Inter, sans-serif;
+	}
+
+	.handsontable td,
+	.handsontable th {
+		@apply !border-border !bg-base first:!border-l-transparent last:!border-r-transparent;
+	}
+
+	.handsontable td {
+		@apply !p-0;
+	}
+
+	.handsontable th {
+		@apply !p-0;
+	}
+}
+@layer base {
+	body {
+		@apply border-border bg-background font-inter text-foreground;
+	}
+}
+
+@layer utilities {
+	.bg-gradient {
+		@apply bg-gradient-to-r from-base to-base-150;
+	}
+
+	.bg-gradient-accent {
+		@apply bg-gradient-to-r from-accent/20 to-accent/30 text-white;
+	}
+
+	.sb-red {
+		@apply border border-red-500;
+	}
+	.sb-green {
+		@apply border border-green-500;
+	}
+	.sb-yellow {
+		@apply border border-yellow-500;
+	}
+	.sb-blue {
+		@apply border border-blue-500;
+	}
+	.sb-purple {
+		@apply border border-purple-500;
+	}
+}

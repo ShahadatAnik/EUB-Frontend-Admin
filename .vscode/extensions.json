@@ -1,0 +1,16 @@
+{
+	"recommendations": [
+		"aaron-bond.better-comments",
+		"vivaxy.vscode-conventional-commits",
+		"codeium.codeium",
+		"github.vscode-pull-request-github",
+		"ms-vsliveshare.vsliveshare",
+		"esbenp.prettier-vscode",
+		"moalamri.inline-fold",
+		"streetsidesoftware.code-spell-checker",
+		"dbaeumer.vscode-eslint",
+		"bradlc.vscode-tailwindcss",
+		"infeng.vscode-react-typescript",
+		"naumovs.color-highlight"
+	]
+}

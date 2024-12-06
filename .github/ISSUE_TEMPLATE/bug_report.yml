@@ -1,0 +1,43 @@
+name: Bug Report
+description: Report a reproducible bug
+labels: [bug, frontend]
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Thanks for taking the time to fill out this bug report!
+
+              Do not forget to update the title above to concisely describe the issue.
+    - type: textarea
+      id: description
+      attributes:
+          label: Description
+          description: |
+              Please provide a clear and concise description of what the bug is. Include
+              screenshots if needed. Please test using the latest version of Racist and API.
+      validations:
+          required: true
+    - type: textarea
+      id: repro
+      attributes:
+          label: Steps To Reproduce
+          description: Your bug will get fixed much faster if we can easily reproduce it. Issues without reproduction steps may be immediately closed as not actionable.
+          placeholder: |
+              1. Open the app in a browser...
+              2. Navigate to the page...
+              3. Click on the button...
+              4. See error...
+      validations:
+          required: false
+    - type: textarea
+      id: current-behavior
+      attributes:
+          label: Current Behavior
+      validations:
+          required: false
+    - type: textarea
+      id: expected-behavior
+      attributes:
+          label: Expected Behavior
+      validations:
+          required: false
