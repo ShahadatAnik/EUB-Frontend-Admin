@@ -16,14 +16,14 @@ const Designation = () => {
 	const navigate = useNavigate();
 	const { data, isLoading, url, deleteData, refetch } = useCapital<ICapitalTableData[]>();
 
-	const pageInfo = useMemo(() => new PageInfo('Procure', url, 'procurement__procure'), [url]);
+	const pageInfo = useMemo(() => new PageInfo('Procure (Capital)', url, 'procurement__procure_capital'), [url]);
 
 	const handleCreate = () => {
-		navigate('/procurement/procure/create');
+		navigate('/procurement/procure-capital/create');
 	};
 
 	const handleUpdate = (row: Row<ICapitalTableData>) => {
-		navigate(`/procurement/procure/${row.original.uuid}/update`);
+		navigate(`/procurement/procure-capital/${row.original.uuid}/update`);
 	};
 
 	// Delete Modal state
@@ -40,7 +40,7 @@ const Designation = () => {
 	};
 
 	const handleDetails = (row: Row<ICapitalTableData>) => {
-		navigate(`/procurement/procure-details/${row.original.uuid}`);
+		navigate(`/procurement/procure-capital-details/${row.original.uuid}`);
 	};
 
 	// Table Columns

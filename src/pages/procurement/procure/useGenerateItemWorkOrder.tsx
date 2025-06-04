@@ -7,6 +7,7 @@ import { FormField } from '@/components/ui/form';
 import CoreForm from '@core/form';
 import { FieldDef } from '@core/form/form-dynamic-fields/types';
 
+import { useOtherItem } from '@/lib/common-queries/other';
 import { getDateTime } from '@/utils';
 
 import { useItemByVendor } from './config/query';
@@ -32,7 +33,8 @@ const useGenerateItemWorkOrder = ({
 	data,
 	form,
 }: IGenerateFieldDefsProps): FieldDef[] => {
-	const { data: itemData } = useItemByVendor<IFormSelectOption[]>(watch('vendor_uuid') as string, 'is_active=true');
+	// const { data: itemData } = useItemByVendor<IFormSelectOption[]>(watch('vendor_uuid') as string, 'is_active=true');
+	const { data: itemData } = useOtherItem<IFormSelectOption[]>();
 
 	return [
 		{
@@ -56,62 +58,62 @@ const useGenerateItemWorkOrder = ({
 			unit: (index: number) =>
 				itemData?.find((item) => item.value === watch(`items.${index}.item_uuid`))?.unit ?? '',
 		},
-		{
-			header: 'Unit Price',
-			accessorKey: 'unit_price',
-			type: 'number',
-			// disabled: true,
-		},
-		{
-			header: 'Received',
-			accessorKey: 'is_received',
-			type: 'custom',
-			component: (index: number) => {
-				return (
-					<FormField
-						control={form.control}
-						name={`items.${index}.is_received`}
-						render={(props) => (
-							<CoreForm.Checkbox
-								disabled={!data.is_work_order}
-								label='Received'
-								onCheckedChange={() => {
-									if (!watch(`items.${index}.is_received`)) {
-										set(`items.${index}.is_received`, true, {
-											shouldDirty: true,
-										});
-										set(`items.${index}.received_date`, getDateTime());
-									} else {
-										set(`items.${index}.is_received`, false, {
-											shouldDirty: true,
-										});
-										set(`items.${index}.received_date`, null);
-									}
-								}}
-								{...props}
-							/>
-						)}
-					/>
-				);
-			},
-		},
-		{
-			header: 'Received Date',
-			accessorKey: 'received_date',
-			type: 'custom',
-			component: (index: number) => {
-				return (
-					<DateTime
-						date={
-							watch(`items.${index}.received_date`)
-								? new Date(watch(`items.${index}.received_date`) as string)
-								: null
-						}
-						isTime={false}
-					/>
-				);
-			},
-		},
+		// {
+		// 	header: 'Unit Price',
+		// 	accessorKey: 'unit_price',
+		// 	type: 'number',
+		// 	// disabled: true,
+		// },
+		// {
+		// 	header: 'Received',
+		// 	accessorKey: 'is_received',
+		// 	type: 'custom',
+		// 	component: (index: number) => {
+		// 		return (
+		// 			<FormField
+		// 				control={form.control}
+		// 				name={`items.${index}.is_received`}
+		// 				render={(props) => (
+		// 					<CoreForm.Checkbox
+		// 						disabled={!data.is_work_order}
+		// 						label='Received'
+		// 						onCheckedChange={() => {
+		// 							if (!watch(`items.${index}.is_received`)) {
+		// 								set(`items.${index}.is_received`, true, {
+		// 									shouldDirty: true,
+		// 								});
+		// 								set(`items.${index}.received_date`, getDateTime());
+		// 							} else {
+		// 								set(`items.${index}.is_received`, false, {
+		// 									shouldDirty: true,
+		// 								});
+		// 								set(`items.${index}.received_date`, null);
+		// 							}
+		// 						}}
+		// 						{...props}
+		// 					/>
+		// 				)}
+		// 			/>
+		// 		);
+		// 	},
+		// },
+		// {
+		// 	header: 'Received Date',
+		// 	accessorKey: 'received_date',
+		// 	type: 'custom',
+		// 	component: (index: number) => {
+		// 		return (
+		// 			<DateTime
+		// 				date={
+		// 					watch(`items.${index}.received_date`)
+		// 						? new Date(watch(`items.${index}.received_date`) as string)
+		// 						: null
+		// 				}
+		// 				isTime={false}
+		// 			/>
+		// 		);
+		// 	},
+		// },
 		{
 			header: 'Actions',
 			accessorKey: 'actions',

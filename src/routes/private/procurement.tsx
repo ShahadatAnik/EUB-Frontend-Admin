@@ -12,9 +12,9 @@ const Vendor = lazy(() => import('@/pages/procurement/vendor'));
 // const ItemWorkOrderEntry = lazy(() => import('@/pages/procurement/item-work-order/entry'));
 // const ItemWorkOrderDetails = lazy(() => import('@/pages/procurement/item-work-order/details'));
 const PDFStatic = lazy(() => import('@/pages/procurement/form'));
-const Procure = lazy(() => import('@/pages/procurement/procure'));
-const ProcureEntry = lazy(() => import('@/pages/procurement/procure/entry'));
-const ProcureDetails = lazy(() => import('@/pages/procurement/procure/details'));
+const ProcureCapital = lazy(() => import('@/pages/procurement/procure'));
+const ProcureCapitalEntry = lazy(() => import('@/pages/procurement/procure/entry'));
+const ProcureCapitalDetails = lazy(() => import('@/pages/procurement/procure/details'));
 const Service = lazy(() => import('@/pages/procurement/service'));
 const ServiceEntry = lazy(() => import('@/pages/procurement/service/entry'));
 const ServiceDetails = lazy(() => import('@/pages/procurement/service/details'));
@@ -48,34 +48,34 @@ const procurementRoutes: IRoute[] = [
 				],
 			},
 			{
-				name: 'Procure',
-				path: '/procurement/procure',
-				element: <Procure />,
-				page_name: 'procurement__procure',
+				name: 'Procure (Capital)',
+				path: '/procurement/procure-capital',
+				element: <ProcureCapital />,
+				page_name: 'procurement__procure_capital',
 				actions: ['create', 'read', 'update', 'delete'],
 			},
 			{
-				name: 'Procure Entry',
-				path: '/procurement/procure/create',
-				element: <ProcureEntry />,
+				name: 'Procure Entry (Capital)',
+				path: '/procurement/procure-capital/create',
+				element: <ProcureCapitalEntry />,
 				hidden: true,
-				page_name: 'procurement__procure_entry',
+				page_name: 'procurement__procure_capital_entry',
 				actions: ['create', 'read', 'update', 'delete'],
 			},
 			{
-				name: 'Procure Update',
-				path: '/procurement/procure/:uuid/update',
-				element: <ProcureEntry />,
+				name: 'Procure Update (Capital)',
+				path: '/procurement/procure-capital/:uuid/update',
+				element: <ProcureCapitalEntry />,
 				hidden: true,
-				page_name: 'procurement__procure_update',
+				page_name: 'procurement__procure_capital_update',
 				actions: ['create', 'read', 'update', 'delete'],
 			},
 			{
-				name: 'Procure Details',
-				path: '/procurement/procure-details/:uuid',
-				element: <ProcureDetails />,
+				name: 'Procure Details (Capital)',
+				path: '/procurement/procure-capital-details/:uuid',
+				element: <ProcureCapitalDetails />,
 				hidden: true,
-				page_name: 'procurement__procure_details',
+				page_name: 'procurement__procure_capital_details',
 				actions: ['read'],
 			},
 

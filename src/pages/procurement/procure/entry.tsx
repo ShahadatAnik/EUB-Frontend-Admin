@@ -262,7 +262,7 @@ const Entry = () => {
 				.then(() => {
 					invalidateQuery();
 					invalidateCapitalDetails();
-					navigate('/procurement/procure');
+					navigate('/procurement/procure-capital');
 				})
 				.catch((error) => {
 					console.error('Error updating news:', error);
@@ -362,7 +362,7 @@ const Entry = () => {
 				.then(() => {
 					invalidateQuery();
 					invalidateCapitalDetails();
-					navigate('/procurement/procure');
+					navigate('/procurement/procure-capital');
 				})
 				.catch((error) => {
 					console.error('Error adding news:', error);
@@ -551,10 +551,10 @@ const Entry = () => {
 					name='sub_category_uuid'
 					render={(props) => (
 						<CoreForm.ReactSelect
-							label='Sub Category'
+							label='Sub Segment'
 							placeholder='Select sub category'
 							menuPortalTarget={document.body}
-							options={subCategoryList!}
+							options={subCategoryList?.filter((item) => item.label !== 'Items') || []!}
 							{...props}
 							onChange={(option) => {
 								setSubCategory(option?.label || null);
@@ -572,98 +572,53 @@ const Entry = () => {
 						/>
 					)}
 				/>
-
-				{subCategory === 'Items' && (
-					<FormField
-						control={form.control}
-						name='vendor_uuid'
-						render={(props) => (
-							<CoreForm.ReactSelect
-								label='Vendor'
-								placeholder='Select vendor'
-								menuPortalTarget={document.body}
-								isDisabled={isUpdate}
-								options={vendorList!}
-								{...props}
-							/>
-						)}
-					/>
-				)}
-				{/* <FormField
-					control={form.control}
-					name='status'
-					render={(props) => (
-						<CoreForm.ReactSelect
-							label='Status'
-							placeholder='Select status'
-							menuPortalTarget={document.body}
-							options={status!}
-							{...props}
-						/>
-					)}
-				/> */}
 			</CoreForm.Section>
 
-			{subCategory !== 'Items' ? (
-				<CoreForm.DynamicFields
-					title='Quotations'
-					extraHeader={
-						<div className='flex items-center justify-center gap-4'>
-							<FormField
-								control={form.control}
-								name='quotation_date'
-								render={(props) => (
-									<CoreForm.DatePicker
-										disableLabel
-										placeholder='Quotation Date'
-										disabled
-										{...props}
-									/>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name='is_quotation'
-								render={(props) => (
-									<CoreForm.Switch
-										labelClassName='text-slate-100'
-										onCheckedChange={(e) => {
-											if (e) {
-												form.setValue('quotation_date', getDateTime());
-											} else {
-												form.setValue('quotation_date', '');
-											}
-										}}
-										{...props}
-									/>
-								)}
-							/>
-						</div>
-					}
-					form={form}
-					fieldName='quotations'
-					fieldDefs={fieldDefsQuotations}
-					fields={quotationFields}
-					{...(form.watch('is_quotation') ? { handleAdd: handleAddQuotations } : {})}
-				/>
-			) : (
-				<CoreForm.DynamicFields
-					title='Items'
-					// extraHeader={
-					// 	<FormField
-					// 		control={form.control}
-					// 		name='is_quotation'
-					// 		render={(props) => <CoreForm.Switch labelClassName='text-slate-100' {...props} />}
-					// 	/>
-					// }
-					form={form}
-					fieldName='items'
-					fieldDefs={fieldDefsItems}
-					fields={itemsFields}
-					handleAdd={handleAddItems}
-					// {...(form.watch('is_quotation') ? { handleAdd: handleAddItems } : {})}
-				/>
-			)}
+			<CoreForm.DynamicFields
+				title='Items'
+				form={form}
+				fieldName='items'
+				fieldDefs={fieldDefsItems}
+				fields={itemsFields}
+				handleAdd={handleAddItems}
+			/>
+
+			<CoreForm.DynamicFields
+				title='Quotations'
+				extraHeader={
+					<div className='flex items-center justify-center gap-4'>
+						<FormField
+							control={form.control}
+							name='quotation_date'
+							render={(props) => (
+								<CoreForm.DatePicker disableLabel placeholder='Quotation Date' disabled {...props} />
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name='is_quotation'
+							render={(props) => (
+								<CoreForm.Switch
+									labelClassName='text-slate-100'
+									onCheckedChange={(e) => {
+										if (e) {
+											form.setValue('quotation_date', getDateTime());
+										} else {
+											form.setValue('quotation_date', '');
+										}
+									}}
+									{...props}
+								/>
+							)}
+						/>
+					</div>
+				}
+				form={form}
+				fieldName='quotations'
+				fieldDefs={fieldDefsQuotations}
+				fields={quotationFields}
+				{...(form.watch('is_quotation') ? { handleAdd: handleAddQuotations } : {})}
+			/>
 
 			<CoreForm.Section
 				title={`Cs`}
